@@ -30,7 +30,12 @@ def ask_true_false(question):
 # result = ask_true_false(test_question)
 # print(result)
 
+def show_feedback(is_correct, question):
+    if is_correct:
+        print("Richtig!")
+    else:
+        correct_answer = question["option_" + question["solution"]]
+        print(f"Falsch! Die richtige Antwort is: {correct_answer}")
 
-
-
-
+result = ask_true_false(test_question)
+show_feedback(result, test_question)
