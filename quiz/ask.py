@@ -1,6 +1,8 @@
 # Hier werden dem Nutzer die Quizfragen gestellt, seine Antworten geprüft und ihm ein Feedback gegeben.
 
-test_question = {
+# Testfragen (nur zum Testen, später kommen die Fragen aus der CSV Datei)
+
+test_question_1 = {
     "ID": "1",
     "category": "Python",
     "type": "True/False",
@@ -10,6 +12,32 @@ test_question = {
     "option_c": "",
     "solution": "b"
 }
+
+test_question_2 = {
+    "ID": "2",
+    "category": "Python",
+    "type": "True/False",
+    "question": "range(1, 5) enthält die Zahl 5.",
+    "option_a": "WAHR",
+    "option_b": "FALSCH",
+    "option_c": "",
+    "solution": "b"
+}
+
+test_question_3 = {
+    "ID": "3",
+    "category": "Geographie",
+    "type": "True/False",
+    "question": "Bern ist die Hauptstadt der Schweiz.",
+    "option_a": "WAHR",
+    "option_b": "FALSCH",
+    "option_c": "",
+    "solution": "a"
+}
+
+test_questions = [test_question_1, test_question_2, test_question_3]
+
+
 
 def ask_true_false(question):
     choices = {"1": "a", "2": "b"}
@@ -27,15 +55,22 @@ def ask_true_false(question):
 
     return choices[answer] == question["solution"]
 
-# result = ask_true_false(test_question)
-# print(result)
-
 def show_feedback(is_correct, question):
     if is_correct:
         print("Richtig!")
     else:
         correct_answer = question["option_" + question["solution"]]
-        print(f"Falsch! Die richtige Antwort is: {correct_answer}")
+        print(f"Falsch! Die richtige Antwort ist: {correct_answer}")
 
-result = ask_true_false(test_question)
-show_feedback(result, test_question)
+def run_quiz(questions, category):
+    category_questions = [question for question in questions if question["category"] == category]
+    correct = 0
+
+    for question in category_questions:
+        is_correct = ask_true_false(question)
+        show_feedback(is_correct, question)
+
+        if is_correct:
+            correct += 1
+
+    return correct, len(category_questions)
