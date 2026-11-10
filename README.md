@@ -1,5 +1,66 @@
 # Quiz Trainer
 
+Der Quiz Trainer ist ein Python-Programm. Der Nutzer wählt eine Kategorie, beantwortet Multiple-Choice und Wahr/Falsch Fragen und sieht am Schluss sein Ergebnis. Zusätzlich kann er eigene Kategorien und Fragen hinzufügen. Die Fragen werden in einer CSV-Datei gespeichert.
+
+## Funktionen
+
+- Hauptmenü: Quiz starten, Kategorie hinzufügen, Frage hinzufügen, Programm beenden.
+- Kategorie auswählen und die dazugehörigen Fragen nacheinander beantworten.
+- Feedback nach jeder Antwort (richtig / falsch inkl. Lösung).
+- Ergebnis mit Anzahl richtiger Antworten und Prozent.
+- In der CSV-Datei sind die Fragen und Kategorien gespeichert.
+
+## Projektstruktur 
+
+```text
+Quiz-Trainer/
+  quiz/
+    __init__.py          macht quiz zu einem Paket
+    ask.py               Fragen stellen und Feedback
+    manage.py            Kategorien und Fragen hinzufügen
+    questions.py         Fragen aus der CSV-Datei laden
+    quiz_9_fragen.csv    gespeicherte Fragen
+    result.py            Ergebnis anzeigen
+  .gitignore             Dateien, die Git ignoriert
+  Flussdiagramm.pdf      Grober Ablauf
+  main.py                Hauptmenü und Programmablauf
+  README.md              Projektbeschreibung
+```
+    
+## Programm starten
+
+1. Repository klonen:
+   ```text
+   git clone https://github.com/Scheima04/Quiz-Trainer.git
+   ```
+2. In den Ordner wechseln:
+   ```text
+   cd Quiz-Trainer
+   ```
+3. Programm starten:
+   ```text
+   python main.py
+   ```
+
+## Datenformat der Fragen (CSV)
+
+Spalten, getrennt durch `;`:
+
+| Spalte | Bedeutung |
+|---|---|
+| ID | laufende Nummer |
+| category | Kategorie, z. B. Geschichte |
+| type | `Multiple Choice` oder `True/False` |
+| question | Fragetext bzw. Aussage |
+| option_a, option_b, option_c | Antwortmöglichkeiten (bei Wahr/Falsch ist `option_c` leer) |
+| solution | richtige Antwort als Buchstabe: `a`, `b` oder `c` |
+
+## Teamarbeit
+
+- Arbeit nach User Stories aufgeteilt (siehe unten)
+- Vor dem Arbeiten immer `git pull`, Commits mit Nachricht 
+- Nur Code pushen, der ohne Fehler startet 
+
 ## Rolle
 
 | Rolle | Beschreibung |
