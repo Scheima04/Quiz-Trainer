@@ -1,7 +1,26 @@
-# US3 - Multiple-Choice-Fragen
+# US3: Multiple-Choice-Fragen
+# Zeigt Fragen mit drei Antwortmöglichkeiten und prüft die Antwort.
 
-# US7 - Ergebnis anzeigen
-from quiz.result import show_result
+def multiple_choice(question):
+    print(question["question"])
+    print("1.", question["option_a"])
+    print("2.", question["option_b"])
+    print("3.", question["option_c"])
+ # Bei einer ungültigen Eingabe wird erneut nach einer Antwort gefragt.
+    answer = input("Deine Antwort (1, 2 oder 3): ")
+
+    while answer != "1" and answer != "2" and answer != "3":
+        print("Ungültige Eingabe")
+        answer = input("Deine Antwort (1, 2 oder 3): ")
+
+    if answer == "1":
+        selected_answer = "a"
+    elif answer == "2":
+        selected_answer = "b"
+    else:
+        selected_answer = "c"
+# Vergleicht die Antwort mit der Lösung und gibt True oder False zurück.
+    return selected_answer == question["solution"]
 
 # Hier werden dem Nutzer die Quizfragen gestellt, seine Antworten geprüft und ihm ein Feedback gegeben.
 
