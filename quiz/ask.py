@@ -1,6 +1,7 @@
 # US3 - Multiple-Choice-Fragen
 
-
+# US7 - Ergebnis anzeigen
+from quiz.result import show_result
 
 # Hier werden dem Nutzer die Quizfragen gestellt, seine Antworten geprüft und ihm ein Feedback gegeben.
 
@@ -77,5 +78,8 @@ def run_quiz(questions, category):
 
         if is_correct:
             correct += 1
+
+    # US 7 – Ergebnis anzeigen
+    show_result(correct, len(category_questions))
 
     return correct, len(category_questions)
