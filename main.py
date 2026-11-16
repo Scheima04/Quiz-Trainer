@@ -28,7 +28,6 @@ def hauptmenue():
             print("Ungültige Eingabe")
 
 
-hauptmenue()
 
 
 
@@ -55,4 +54,5 @@ def kategorie_auswaehlen():
     return kategorien[int(auswahl) - 1]
 
 # Ruft die Kategorieauswahl zum Testen auf.
+hauptmenue()
 kategorie_auswaehlen()
