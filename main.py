@@ -1,4 +1,4 @@
-from userInterface import show_menu
+from quiz.Interface.userInterface import show_menu
 def main():
     show_menu()
 # zeige menu
@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
 ### muss noch überarbeitet werden
 ### 1. Quiz starten
-    # zeige kategorien dem user
+    # zeige kategorien dem user 
     #user wählt kategorie und quiz startet
 
 ### 2. Eigenes Quiz erstellen
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # weitere frage hinzufügen? Ja oder Nein
 #hier wichtig mehrere antwortoptionen sammeln und speicher pro frage und die richtige antwort muss markiert werden, damit sie beim quizz dann als richtig zählt
 
-# Quiz berarbeiten
+# 3. Quiz berarbeiten
     #kategorie ändern?
     # frage berarbeiten
         #alle fragen zeigen und user wählt frage welcher er oder sie bearbeiten möchte
