@@ -15,6 +15,8 @@ Der Quiz Trainer ist ein Python-Programm. Der Nutzer wählt eine Kategorie, bean
 ```text
 Quiz-Trainer/
   quiz/
+    Interface/
+        userInterface    Hauptmenü und Quizsteuerung
     __init__.py          macht quiz zu einem Paket
     ask.py               Fragen stellen und Feedback
     manage.py            Kategorien und Fragen hinzufügen
