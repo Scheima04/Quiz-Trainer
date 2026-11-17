@@ -122,3 +122,34 @@ def add_question(questions):
     save_to_csv(questions)     
 
     print("Die Frage wurde hinzugefügt.")                                                
+
+
+ 
+# US2: Kategorie auswählen
+
+def kategorie_auswaehlen(Quizes):
+    kategorien = []
+
+    # Kategorien aus den geladenen Fragen sammeln
+    for quiz in Quizes:
+        kategorie = quiz["category"]
+
+        if kategorie not in kategorien:
+            kategorien.append(kategorie)
+
+
+    # Die Kategorien werden nummeriert und angezeigt.
+    nummer = 1
+    for kategorie in kategorien:
+        print(nummer, kategorie)
+        nummer = nummer + 1
+
+    auswahl = input("Wähle eine Kategorie (1-3): ")
+
+    # Bei ungültiger Eingabe wird erneut gefragt.
+    while auswahl != "1" and auswahl != "2" and auswahl != "3":
+        print("Ungültige Kategorienummer")
+        auswahl = input("Wähle eine Kategorie (1-3): ")
+
+    # Die ausgewählte Kategorie wird zurückgegeben.
+    return kategorien[int(auswahl) - 1]   
