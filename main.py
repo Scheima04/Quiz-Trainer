@@ -1,9 +1,3 @@
-from quiz.Interface.userInterface import show_menu
-def main():
-    show_menu()
-# zeige menu
-def show_menu():
-    pass
 
 # user wählt menupunkt
 
