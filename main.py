@@ -7,8 +7,7 @@ def show_menu():
 
 # user wählt menupunkt
 
-if __name__ == '__main__':
-    main()
+
 
 ### muss noch überarbeitet werden
 ### 1. Quiz starten
