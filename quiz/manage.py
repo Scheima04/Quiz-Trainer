@@ -32,7 +32,7 @@ def get_existing_categories(questions):
 
 #Funktion erstellt eine neue Frage mit Fragetyp, Antworten, Lösung und eigener ID. 
 def create_question(questions, category):
-    question_type = ask_choice("Fragetyp (1.Multiple Choice, 2. True/False): ",{"1": "Multiple Choice", "2": "True/False"})
+    question_type = ask_choice("Fragetyp (1. Multiple Choice, 2. True/False): ",{"1": "Multiple Choice", "2": "True/False"})
     text = ask_text("Fragetext: ")                                                                  
 
     if question_type == "Multiple Choice":                                                          
