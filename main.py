@@ -56,6 +56,7 @@ def hauptmenue():
         elif auswahl == "3":
             print("Quiz bearbeiten")
 
+        #Dieser Teil gehört auch zur User Story 12: Programm beenden
         elif auswahl == "4":
             print("Programm wird beendet.")
 
