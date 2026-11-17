@@ -1,5 +1,9 @@
+# US7 - Ergebnis anzeigen
+from quiz.result import show_result
+
 # US3: Multiple-Choice-Fragen
 # Zeigt Fragen mit drei Antwortmöglichkeiten und prüft die Antwort.
+
 
 def multiple_choice(question):
     print(question["question"])
@@ -92,7 +96,12 @@ def run_quiz(questions, category):
     correct = 0
 
     for question in category_questions:
-        is_correct = ask_true_false(question)
+        if question["type"] == "True/False":
+
+            is_correct = ask_true_false(question)
+        else:
+            is_correct = multiple_choice(question)              # multiplechoice wurde hinzugefügt 
+
         show_feedback(is_correct, question)
 
         if is_correct:
