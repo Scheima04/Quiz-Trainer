@@ -92,9 +92,10 @@ def add_category(questions):
         if name not in existing:     
             break
         else:                                       
-            print("Ungültige Eingabe")                                                                    
+            print("Diese Kategorie existiert bereits. Bitte wähle einen anderen Namen.")                                                                    
 
-    print("Bitte erstelle die erste Frage.")      
+    print("Bitte erstelle die erste Frage.") 
+
     new_question = create_question(questions,name)          
     questions.append(new_question)                              
     save_to_csv(questions)
@@ -117,11 +118,19 @@ def add_question(questions):
         choices[str(i + 1)] = categories[i] 
 
     category = ask_choice("Kategorie wählen: ", choices)
-    new_question = create_question(questions, category)
-    questions.append(new_question)                              
-    save_to_csv(questions)     
 
-    print("Die Frage wurde hinzugefügt.")                                                
+    #Zusätzliche Funktion, um mehrere Fragen in der gleichen Kategorie hinzuzufügen, ohne die Kategorie erneut auswählen zu müssen.
+    while True:
+        new_question = create_question(questions, category)
+        questions.append(new_question)
+        save_to_csv(questions)     
+        
+        print("Die Frage wurde hinzugefügt.")     
+
+        add_another_question = ask_choice("Möchtest du eine weitere Frage in dieser Kategorie hinzufügen? (1. Ja, 2. Nein): ", {"1": "Ja", "2": "Nein"})
+
+        if add_another_question == "Nein":
+            break                                           
 
 
  
