@@ -28,45 +28,6 @@ def multiple_choice(question):
 
 # Hier werden dem Nutzer die Quizfragen gestellt, seine Antworten geprüft und ihm ein Feedback gegeben.
 
-# Testfragen (nur zum Testen, später kommen die Fragen aus der CSV Datei)
-
-test_question_1 = {
-    "ID": "1",
-    "category": "Python",
-    "type": "True/False",
-    "question": '"3" + 2 ergibt 5.',
-    "option_a": "WAHR",
-    "option_b": "FALSCH",
-    "option_c": "",
-    "solution": "b"
-}
-
-test_question_2 = {
-    "ID": "2",
-    "category": "Python",
-    "type": "True/False",
-    "question": "range(1, 5) enthält die Zahl 5.",
-    "option_a": "WAHR",
-    "option_b": "FALSCH",
-    "option_c": "",
-    "solution": "b"
-}
-
-test_question_3 = {
-    "ID": "3",
-    "category": "Geographie",
-    "type": "True/False",
-    "question": "Bern ist die Hauptstadt der Schweiz.",
-    "option_a": "WAHR",
-    "option_b": "FALSCH",
-    "option_c": "",
-    "solution": "a"
-}
-
-test_questions = [test_question_1, test_question_2, test_question_3]
-
-
-
 
 def ask_true_false(question):
     choices = {"1": "a", "2": "b"}
