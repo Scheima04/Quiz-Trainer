@@ -168,23 +168,30 @@ def kategorie_auswaehlen(Quizes):
     # Kategorien aus den geladenen Fragen sammeln
     for quiz in Quizes:
         kategorie = quiz["category"]
-
         if kategorie not in kategorien:
             kategorien.append(kategorie)
 
 
-    # Die Kategorien werden nummeriert und angezeigt.
+    # Kategorien nummerieren und anzeigen
     nummer = 1
     for kategorie in kategorien:
         print(nummer, kategorie)
         nummer = nummer + 1
 
-    auswahl = input("Wähle eine Kategorie (1-3): ")
+    # Gültige Kategorienummern sammeln
+    nummern = []
+    nummer = 1
+    for kategorie in kategorien:
+        nummern.append(str(nummer))
+        nummer = nummer + 1
 
-    # Bei ungültiger Eingabe wird erneut gefragt.
-    while auswahl != "1" and auswahl != "2" and auswahl != "3":
+    # Kategorie auswählen
+    auswahl = input("Wähle eine Kategorienummer: ")
+
+    # Ungültige Eingaben erneut abfragen
+    while auswahl not in nummern:
         print("Ungültige Kategorienummer")
-        auswahl = input("Wähle eine Kategorie (1-3): ")
+        auswahl = input("Wähle eine Kategorienummer: ")
 
-    # Die ausgewählte Kategorie wird zurückgegeben.
-    return kategorien[int(auswahl) - 1]   
+    # Ausgewählte Kategorie zurückgeben
+    return kategorien[int(auswahl) - 1]
