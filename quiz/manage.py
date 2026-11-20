@@ -6,7 +6,7 @@ def ask_text(prompt):
         text = input(prompt)
 
         if text == "" or ";" in text:
-            print("Ungültige Eingabe") 
+            print("Ungültige Eingabe. Bitte gib deine Frage erneut ein. (Die Eingabe darf nicht leer sein und kein Semikolon (;) enthalten.") 
         else:                                     
             return text                      
 
@@ -16,7 +16,7 @@ def ask_choice(prompt, choices):
         answer = input(prompt)
 
         if answer not in choices:
-            print("Ungültige Eingabe") 
+            print("Ungültige Eingabe. Bitte wähle eine der angegebenen Nummern und versuche es erneut.") 
         else:           
             return choices[answer]                          
                                  
@@ -32,8 +32,8 @@ def get_existing_categories(questions):
 
 #Funktion erstellt eine neue Frage mit Fragetyp, Antworten, Lösung und eigener ID. 
 def create_question(questions, category):
-    question_type = ask_choice("Fragetyp (1. Multiple Choice, 2. True/False): ",{"1": "Multiple Choice", "2": "True/False"})
-    text = ask_text("Fragetext: ")                                                                  
+    question_type = ask_choice("Welchen Fragetyp möchtest du wählen, 1. Multiple Choice oder 2. True/False?: ",{"1": "Multiple Choice", "2": "True/False"})
+    text = ask_text("Wie lautet deine neue Quizfrage?: ")                                                                  
 
     if question_type == "Multiple Choice":                                                          
         options = [ask_text("Antwort 1: "), ask_text("Antwort 2: "), ask_text("Antwort 3: ")]
@@ -42,7 +42,7 @@ def create_question(questions, category):
         options = ["WAHR", "FALSCH", ""]                                                            
         letters = {"1": "a", "2": "b"}
 
-    solution = ask_choice("Nummer der richtigen Antwort:", letters)
+    solution = ask_choice("Welche Anwort ist richtig? Gib die entsprechende Nummer ein: ", letters)
    
     #Ermittelt die nächste ID, damit jede neue Frage eine eigene Nummer erhält.
     last_used_id = 0                       
@@ -79,7 +79,7 @@ def save_to_csv(questions):
             question["option_b"] + ";" +
             question["option_c"] + ";" +
             question["solution"] + "\n"       #Sorgt dafür, dass die nächste Frage in einer neuen Zeile stehen kann.
-        )        
+        )      
 
 #User Story 10: Neue Kategorie hinzufügen
 #Funktion prüft den Kategoriennamen und erstellt die erste Frage für diese Kategorie.
@@ -87,20 +87,32 @@ def add_category(questions):
     existing = get_existing_categories(questions)            
 
     while True:                                                                     
-        name = ask_text("Name der neuen Kategorie: ")
+        name = ask_text("Wie soll die neue Kategorie heissen?: ")
 
         if name not in existing:     
             break
         else:                                       
-            print("Diese Kategorie existiert bereits. Bitte wähle einen anderen Namen.")                                                                    
+            print("Diese Kategorie existiert leider bereits. Bitte wähle einen anderen Namen.")                                                                    
 
-    print("Bitte erstelle die erste Frage.") 
+    print("Erstelle die erste Frage für deine neue Kategorie.") 
 
-    new_question = create_question(questions,name)          
-    questions.append(new_question)                              
-    save_to_csv(questions)
+    #Exception Handling
+    try:
+        new_question = create_question(questions,name)                                      
+        save_to_csv([new_question])
 
-    print("Kategorie erfolgreich hinzugefügt.")         
+    #Fängt den Fehler ab, wenn die ID (der gelesene Text) nicht in eine Zahl umgewandelt werden kann.
+    except ValueError:
+        print("Die neue Kategorie konnte leider nicht erstellt werden, da die ID nicht in eine Zahl umgewandelt werden konnte. Bitte prüfen Sie deshalb die ID.")
+        return
+
+    #Fängt Fehler beim Öffnen oder Lesen der CSV-Datei ab.
+    except OSError:
+        print("Die neue Kategorie konnte leider nicht gespeichert werden. Bitte überprüfe, ob die Datei noch vorhanden ist und darin etwas gespeichert werden kann.")
+        return
+    
+    questions.append(new_question)  
+    print("Die neue Kategorie wurde erfolgreich hinzugefügt.")         
 
 #User Story 11: Neue Frage hinzufügen.
 #Funktion zeigt die vorhandenen Kategorien an und speichert eine neue Frage in der ausgewählten Kategorie. 
@@ -117,23 +129,37 @@ def add_question(questions):
         print(f"{i + 1}. {categories[i]}")                                             
         choices[str(i + 1)] = categories[i] 
 
-    category = ask_choice("Kategorie wählen: ", choices)
+    category = ask_choice("Welche Kategorie soll die neue Frage erhalten?: ", choices)
 
     #Zusätzliche Funktion, um mehrere Fragen in der gleichen Kategorie hinzuzufügen, ohne die Kategorie erneut auswählen zu müssen.
     while True:
-        new_question = create_question(questions, category)
-        questions.append(new_question)
-        save_to_csv(questions)     
-        
-        print("Die Frage wurde hinzugefügt.")     
 
-        add_another_question = ask_choice("Möchtest du eine weitere Frage in dieser Kategorie hinzufügen? (1. Ja, 2. Nein): ", {"1": "Ja", "2": "Nein"})
+        #Exception Handling
+        try: 
+            new_question = create_question(questions, category)
+            save_to_csv([new_question])     
+
+        #Fängt den Fehler ab, wenn die ID (der gelesene Text) nicht in eine Zahl umgewandelt werden kann.
+        except ValueError:
+            print("Die neue Frage konnte leider nicht hinzugefügt werden, da die ID nicht in eine Zahl umgewandelt werden konnte. Bitte prüfen Sie deshalb die ID.")           
+            return
+
+        #Fängt Fehler beim Öffnen oder Lesen der CSV-Datei ab. 
+        except OSError:
+            print("Die neue Frage konnte leider nicht gespeichert werden. Bitte überprüfe, ob die Datei noch vorhanden ist und darin etwasgespeichert werden kann.")
+            return
+
+        questions.append(new_question)
+        print("Die neue Frage wurde erfolgreich hinzugefügt und gespeichert.")     
+
+        add_another_question = ask_choice("Möchtest du eine weitere Frage in dieser Kategorie hinzufügen? 1. Ja, 2. Nein: ", {"1": "Ja", "2": "Nein"})
 
         if add_another_question == "Nein":
-            break                                           
+            break      
 
 
- 
+
+
 # US2: Kategorie auswählen
 
 def kategorie_auswaehlen(Quizes):
