@@ -3,14 +3,12 @@ from quiz.result import show_result
 
 # US3: Multiple-Choice-Fragen
 # Zeigt Fragen mit drei Antwortmöglichkeiten und prüft die Antwort.
-
-
 def multiple_choice(question):
     print(question["question"])
     print("1.", question["option_a"])
     print("2.", question["option_b"])
     print("3.", question["option_c"])
- # Bei einer ungültigen Eingabe wird erneut nach einer Antwort gefragt.
+    # Bei einer ungültigen Eingabe wird erneut nach einer Antwort gefragt.
     answer = input("Deine Antwort (1, 2 oder 3): ")
 
     while answer != "1" and answer != "2" and answer != "3":
@@ -23,7 +21,7 @@ def multiple_choice(question):
         selected_answer = "b"
     else:
         selected_answer = "c"
-# Vergleicht die Antwort mit der Lösung und gibt True oder False zurück.
+    # Vergleicht die Antwort mit der Lösung und gibt True oder False zurück.
     return selected_answer == question["solution"]
 
 
@@ -51,23 +49,26 @@ def show_feedback(is_correct, question):
         correct_answer = question["option_" + question["solution"]]
         print(f"Falsch! Die richtige Antwort ist: {correct_answer}")
 
+# US 6 - Stellt alle Fragen einer Kategorie nacheinander, überspringt fehlerhafte Fragen und zählt mit.
 def run_quiz(questions, category):
     category_questions = [question for question in questions if question["category"] == category]
     correct = 0
+    asked = 0
 
     for question in category_questions:
-        if question["type"] == "True/False":
-
-            is_correct = ask_true_false(question)
+        try:
+            if question["type"] == "True/False":
+                is_correct = ask_true_false(question)
+            else:
+                is_correct = multiple_choice(question)
+            show_feedback(is_correct, question)
+        except KeyError:
+            print("Diese Frage ist fehlerhaft und wird übersprungen.")
         else:
-            is_correct = multiple_choice(question)              # multiplechoice wurde hinzugefügt 
+            asked += 1
+            if is_correct:
+                correct += 1
 
-        show_feedback(is_correct, question)
-
-        if is_correct:
-            correct += 1
-
-    # US 7 – Ergebnis anzeigen
-    show_result(correct, len(category_questions))
-
-    return correct, len(category_questions)
+    # US 7 - Zeigt Ergebnis an.
+    show_result(correct, asked)
+    return correct, asked
