@@ -9,15 +9,15 @@ Der Quiz Trainer ist ein Python-Programm. Der Nutzer wählt eine Kategorie, bean
 - Feedback nach jeder Antwort (richtig / falsch inkl. Lösung).
 - Ergebnis mit Anzahl richtiger Antworten und Prozent.
 - In der CSV-Datei sind die Fragen und Kategorien gespeichert.
+- Fehlerhafte Fragen werden übersprungen, das Programm stürzt nicht ab.
 
-## Projektstruktur 
+## Projektstruktur
 
 ```text
 Quiz-Trainer/
   quiz/
     Interface/
-        userInterface    Hauptmenü und Quizsteuerung
-    __init__.py          macht quiz zu einem Paket
+      userInterface.py   Hauptmenü und Quizsteuerung
     ask.py               Fragen stellen und Feedback
     manage.py            Kategorien und Fragen hinzufügen
     questions.py         Fragen aus der CSV-Datei laden
@@ -25,7 +25,7 @@ Quiz-Trainer/
     result.py            Ergebnis anzeigen
   .gitignore             Dateien, die Git ignoriert
   Flussdiagramm.pdf      Grober Ablauf
-  main.py                Hauptmenü und Programmablauf
+  main.py                Startpunkt, ruft das Hauptmenü auf
   README.md              Projektbeschreibung
 ```
     
@@ -56,6 +56,10 @@ Spalten, getrennt durch `;`:
 | question | Fragetext bzw. Aussage |
 | option_a, option_b, option_c | Antwortmöglichkeiten (bei Wahr/Falsch ist `option_c` leer) |
 | solution | richtige Antwort als Buchstabe: `a`, `b` oder `c` |
+
+## Fehlerbehandlung
+
+Fehlerhafte Fragen in der CSV-Datei (zum Beispiel eine fehlende Spalte oder eine ungültige Lösung) lösen einen KeyError aus. Das Programm fängt ihn mit try/except ab, zeigt die Meldung «Diese Frage ist fehlerhaft und wird übersprungen.» und macht mit der nächsten Frage weiter. Übersprungene Fragen zählen nicht im Ergebnis.
 
 ## Teamarbeit
 
@@ -151,6 +155,7 @@ Akzeptanzkriterien:
 - Der Quizdurchgang umfasst ausschliesslich die Fragen der ausgewählten Kategorie.
 - Erst wenn alle Fragen dieser Kategorie beantwortet wurden, wird der Quizdurchgang beendet und die Ergebnisauswertung angezeigt.
 - Fragen aus anderen Kategorien werden nicht automatisch gestartet.
+- Eine fehlerhafte Frage (zum Beispiel eine fehlende Spalte oder eine ungültige Lösung in der CSV-Datei) wird übersprungen und nicht gezählt. Es erscheint eine Meldung, und das Quiz läuft weiter.
 
 ## 7 – Ergebnis anzeigen
 

@@ -26,10 +26,9 @@ def multiple_choice(question):
 # Vergleicht die Antwort mit der Lösung und gibt True oder False zurück.
     return selected_answer == question["solution"]
 
-# Hier werden dem Nutzer die Quizfragen gestellt, seine Antworten geprüft und ihm ein Feedback gegeben.
 
-
-def ask_true_false(question):
+# US4 - Wahr/Falsch Fragen
+def ask_true_false(question):               
     choices = {"1": "a", "2": "b"}
 
     while True:
