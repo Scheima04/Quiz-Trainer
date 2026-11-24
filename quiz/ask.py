@@ -49,6 +49,13 @@ def show_feedback(is_correct, question):
         correct_answer = question["option_" + question["solution"]]
         print(f"Falsch! Die richtige Antwort ist: {correct_answer}")
 
+# Prüft, ob die Lösung zum Fragetyp passt (a-c bzw. a-b).
+def has_valid_solution(question):
+    if question["type"] == "True/False":
+        return question["solution"] in ["a", "b"]
+    return question["solution"] in ["a", "b", "c"]
+
+
 # US 6 - Stellt alle Fragen einer Kategorie nacheinander, überspringt fehlerhafte Fragen und zählt mit.
 def run_quiz(questions, category):
     category_questions = [question for question in questions if question["category"] == category]
@@ -56,6 +63,10 @@ def run_quiz(questions, category):
     asked = 0
 
     for question in category_questions:
+        if not has_valid_solution(question):
+            print("Diese Frage ist fehlerhaft und wird übersprungen.")
+            continue
+
         try:
             if question["type"] == "True/False":
                 is_correct = ask_true_false(question)
