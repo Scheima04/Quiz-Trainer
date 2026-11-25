@@ -22,18 +22,19 @@ def hauptmenue():
 
         if auswahl == "1":
             kategorie = kategorie_auswaehlen(questions)  # Kategorie auswählen
-            run_quiz(questions, kategorie)  # Quiz starten
+            if kategorie != None:
+                run_quiz(questions, kategorie)  # Quiz starten
 
         elif auswahl == "2":
-            print("Eigenes Quiz erstellen")
+            print("Kategorie hinzufügen")
             add_category(questions)
 
         elif auswahl == "3":
-            
-            print("Quiz bearbeiten")
+            print("Frage hinzufügen")
+            add_question(questions)
 
         elif auswahl == "4":
-            print("Programm wird beendet.")
+            print("Auf Wiedersehen!")
 
         else:
             print("Ungültige Eingabe")
