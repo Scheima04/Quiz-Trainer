@@ -171,6 +171,10 @@ def kategorie_auswaehlen(Quizes):
         if kategorie not in kategorien:
             kategorien.append(kategorie)
 
+    # Prüfen, ob Kategorien vorhanden sind
+    if kategorien == []:
+        print("Keine Kategorien vorhanden.")
+        return None
 
     # Kategorien nummerieren und anzeigen
     nummer = 1
