@@ -13,8 +13,8 @@ def hauptmenue():
     while auswahl != "4":
         print("HAUPTMENÜ")
         print("1. Quiz starten")
-        print("2. Eigenes Quiz erstellen")
-        print("3. Quiz bearbeiten")
+        print("2. Kategorie hinzufügen")
+        print("3. Frage hinzufügen")
         print("4. Programm beenden")
 
         auswahl = input("Bitte wähle eine Option: ")
