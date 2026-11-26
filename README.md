@@ -16,9 +16,10 @@ Der Quiz Trainer ist ein Python-Programm. Der Nutzer wählt eine Kategorie, bean
 ```text
 Quiz-Trainer/
   quiz/
-    Interface/
+    Interface/           Ordner für die Benutzeroberfläche
       userInterface.py   Hauptmenü und Quizsteuerung
     ask.py               Fragen stellen und Feedback
+    delete.py            Quiz und zugehörige Fragen löschen
     manage.py            Kategorien und Fragen hinzufügen
     questions.py         Fragen aus der CSV-Datei laden
     quiz_9_fragen.csv    gespeicherte Fragen
@@ -228,3 +229,17 @@ Akzeptanzkriterien:
 - Vor dem Beenden erscheint eine kurze Abschiedsmeldung «Auf Wiedersehen!».
 - Nach der Auswahl wird das Programm beendet und es werden keine weiteren Quizfragen angezeigt.
 - Bereits gespeicherte Quizfragen bleiben in der CSV-Datei erhalten.
+
+ ## 13 – Quiz löschen
+
+**Als Nutzer möchte ich ein bestehendes Quiz löschen können, damit ich nicht mehr benötigte Quiz entfernen und meine Quizsammlung übersichtlich halten kann.**
+
+- Im Hauptmenü steht die Option «Quiz löschen» zur Verfügung.
+- Die verfügbaren Quiz werden angezeigt.
+- Der Nutzer kann das gewünschte Quiz auswählen.
+- Vor dem Löschen wird eine Bestätigung verlangt.
+- Bei einer Bestätigung werden das ausgewählte Quiz und alle dazugehörigen Fragen aus der CSV-Datei gelöscht.
+- Bei einem Abbruch bleibt das Quiz unverändert.
+- Das gelöschte Quiz wird auch nach einem Neustart nicht mehr angezeigt.
+- Alle anderen Quiz bleiben unverändert.
+- Nach dem Löschen wird das Hauptmenü erneut angezeigt.
