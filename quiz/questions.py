@@ -26,6 +26,10 @@ def load_questions():
                     # Frage zur Liste hinzufügen
                     questions.append(question)
 
+                else:
+                    print(f"Zeile mit ID {values[0]} ist fehlerhaft "
+                      "und wird übersprungen.")
+    
     # Fehler behandeln, falls Datei fehlt
     except FileNotFoundError:
         print("Fehler: CSV-Datei nicht gefunden.")
